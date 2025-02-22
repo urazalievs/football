@@ -1,6 +1,5 @@
 
 import { SeachCountry } from "../searchCountry/SearchCounty";
-import { AppInput } from "../UI/AppInput/AppInput"
 import { SLeftSide } from "./LeftSide.style"
 
 
