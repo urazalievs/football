@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom"
 import { SMainHeader } from "./MainHeader.style"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { LeftSide } from "../LeftSide/LeftSide"
 import { LigftTheme } from "../UI/LigftTheme/LigftTheme"
 import { TRightSide } from "../RightSide/RightSide"
+import { ThemeContext, themes } from "../../contexts/themeContexts"
 
 interface TMainHeader extends TRightSide { }
 
 export const MainHeader = ({ homePage, teamPage, playerPage }: TMainHeader) => {
+    const {theme} =useContext(ThemeContext)
     const [burgerActiv, setBurgerActiv] = useState(false)
     const [menyDisplay, setMenuDisplay] = useState(false)
     const clickburger = () => {
@@ -19,7 +21,7 @@ export const MainHeader = ({ homePage, teamPage, playerPage }: TMainHeader) => {
     const [teamColor] = useState(teamPage)
     const [plaerColor] = useState(playerPage)
     return (
-        <SMainHeader>
+        <SMainHeader isLight={theme === themes.light}>
             <div className={`burgerInfo ${menyDisplay ? "display" : ""}`}>
                 <LeftSide />
             </div>
@@ -35,7 +37,7 @@ export const MainHeader = ({ homePage, teamPage, playerPage }: TMainHeader) => {
                 <div className="mainNav">
                     <div className="headerNavPage">
                         <img src={`${homeColor ? 'public/img/homeG.svg' : "public/img/homew.svg"}`} alt="icon" />
-                        <a className={`${homeColor ? "navtext" : ''}`} href="/">Домой</a>
+                        <a className={`${homeColor ? "navtext" : ''}`} href="/main-page">Домой</a>
                     </div>
                     <div className="headerNavPage">
                         <img src={`${teamColor ? "public/img/shieldG.png" : "public/img/shieldW.png"}`} alt="icon" />

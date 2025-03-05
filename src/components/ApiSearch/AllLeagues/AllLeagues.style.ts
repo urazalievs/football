@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 
-export const SAllLeagues = styled.div`
+export const SAllLeagues = styled.div<{islight:boolean}>`
 display: grid;
 grid-template-columns: repeat(auto-fit, minmax(calc(19vw + 90px), 1fr));
 gap: calc(1vw + 2px);
@@ -9,7 +9,6 @@ gap: calc(1vw + 2px);
     height: 100%;
     border: 1px solid #000;
     background-color: #333131;
-    /* padding: 0 calc(1vw + 2px); */
     border-radius: 20px;
     
 }
@@ -34,6 +33,10 @@ gap: calc(1vw + 2px);
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
 }
+.leagueName a {
+    cursor: pointer;
+    font-size: calc(0.9vw + 4px)
+}
 .leaguaInfo{
     height: 50%;
     display: grid;
@@ -56,5 +59,16 @@ gap: calc(1vw + 2px);
     flex-direction: column;
     gap: calc(0.5vw + 0.5px);
     margin-left: calc(0.4vw + 3.5px);
+}
+${({islight})=>
+islight &&
+css`
+.leagueName{
+    background-color: #999;
+}
+.leagueCont{
+    background-color: #fff;
+}
+`
 }
 `

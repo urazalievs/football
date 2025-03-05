@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 
-export const SModalCountry = styled.div`
+export const SModalCountry = styled.div<{isLight:boolean}>`
     position: fixed;
     top: 0;
     right: 0;
@@ -39,5 +39,13 @@ export const SModalCountry = styled.div`
 }
 .mdalCountryCont button:hover{
     color: #C3CC5A;
+}
+${({isLight})=>
+isLight &&
+css`
+.mdalCountryCont{
+    background-color: #ffffffa8;
+}
+`
 }
 `

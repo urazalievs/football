@@ -7,7 +7,6 @@ color: white;
     margin:calc(0.9vw + 7px) 0 ;
 }
 
-
 .VectorCountry img{
     margin: calc(0.4vw + -1px) ;
     width: calc(0.9vw + 7px);
@@ -29,7 +28,6 @@ color: white;
     padding: calc(0.4vw + -1px) 5px;
     border-radius: 12px;
     background-color: #333131;
-    /* margin-top: 20px; */
     cursor: pointer;
     display: flex;
     justify-content: center;

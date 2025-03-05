@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const SMainPage = styled.div`
+export const SMainPage = styled.div<{islight:boolean}>`
 
     width: 100%;
     height: 100%;
@@ -20,9 +20,7 @@ export const SMainPage = styled.div`
 #_white{
     color: red;
 }
-.mainPageContainer._dark{
-    background-color:white;
-}
+
 .mainInfo{
     display: flex;
     flex-direction: column;
@@ -31,7 +29,7 @@ export const SMainPage = styled.div`
     padding: calc(2vw + 2.7px) calc(1vw + 0.8px) 20px calc(1vw + 0.8px);
     background-color: #1E1E1E;
     width:100%;
-    border-radius: 30px;
+    border-radius: 25px;
 }
 .mainLogo{
     background-image: url(public/img/Banner.png);
@@ -40,9 +38,20 @@ export const SMainPage = styled.div`
     background-size: cover;
     width: calc(47vw + 48px);
     height: calc(17vw + 23px);
-    border-radius: 30px;
+    border-radius: 25px;
 }
-
+${({islight})=>
+islight &&
+css`
+.mainInfo{
+    background-color: #666;
+}
+.mainHeader{
+    background-color: #ccc;
+    color: black;
+}
+`
+}
 @media (max-width:1000px){
     .mainPageContainer{
         grid-template-columns: 3fr 1fr;

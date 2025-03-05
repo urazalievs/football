@@ -47,47 +47,41 @@ interface IGetOneArrayResponse {
     numberOfAvailableSeasons: number,
     lastUpdated: string
 }
-
 interface IGetTenScorersResconce {
-    competition: {
-        code: string,
-        emblem: string,
-        id: number,
-        name: string,
-        type: string,
-    }
-
-
-    count: number,
-    filters: [
-        limit: number,
-        season: string
-    ]
     scorers: [
-        assists: number,
-        goals: number,
-        penalties: number,
-        playedMatches: number,
-        player: {
-            dateOfBirth: string,
-            firstName: string,
-            id: number,
-            lastName: string,
-            lastUpdated: string,
-            name: string,
-            nationality: string,
-            position: null,
-            section: string,
-            shirtNumber: null,
+        {
+            player: {
+                id: number,
+                name: string,
+                firstName: string,
+                lastName: string,
+                dateOfBirth: string,
+                nationality: string,
+                section: string,
+                position: null,
+                shirtNumber: null,
+                lastUpdated: string
+            },
+            team: {
+                id: number,
+                name: string,
+                shortName: string,
+                tla: string,
+                crest: string,
+                address: string,
+                website: string,
+                founded: number,
+                clubColors: string,
+                venue: string,
+                lastUpdated: string
+            },
+            playedMatches: number,
+            goals: number,
+            assists: number,
+            penalties: null
         }
     ]
-
 }
-interface IGetTenScorersPayload {
-    limit: number,
-    season: string
-}
-
 interface IGetCountryResponce {
     count: number,
     filters: object,
@@ -100,35 +94,6 @@ interface IGetCountryResponce {
             parentAreaId: number,
             parentArea: string
         },]
-}
-// Описание структуры игрока
-interface Player {
-    id: number;
-    name: string;
-    firstName: string;
-    lastName: string;
-    dateOfBirth: string;
-    nationality: string;
-}
-
-// Описание структуры команды
-interface Team {
-    id: number;
-    name: string;
-}
-
-// Описание структуры бомбардира
-interface Scorer {
-    player: Player;
-    team: Team;
-    numberOfGoals: number;
-}
-
-// Описание всей структуры ответа API
-interface ScorersResponse {
-    count: number;
-    filters: object;
-    scorers: Scorer[];
 }
 interface IGetAllMatchesResponse {
     matches: [{
@@ -345,7 +310,7 @@ interface IgetMatvfkgd {
     status: string
 }
 interface IGetPersonResponse {
-            id: number,
+    id: number,
     name: string,
     firstName: string,
     lastName: string,
@@ -386,31 +351,212 @@ interface IGetPersonResponse {
             until: string
         }
     }
-        
-    
+
+
 
 }
-
-interface IGetLiveMachesResponse extends IGetAllMatchesResponse { }
 interface IGetFinishedMatchesResponse extends IGetAllMatchesResponse { }
-
 interface IGetAllTeamsResponse {
     teams: [
         {
             id: number,
             name: string,
             shortName: string,
-            tla:string,
+            tla: string,
             crest: string,
             address: string,
             website: string,
             founded: number,
             clubColors: string,
-            venue:string,
+            venue: string,
             lastUpdated: string
         },
     ]
 }
+interface IgetOneTeamResponse {
+    area: {
+        id: number,
+        name: string,
+        code: string,
+        flag: string
+    },
+    id: number,
+    name: string,
+    shortName: string,
+    tla: string,
+    crest: string,
+    address: string,
+    website: string,
+    founded: number,
+    clubColors: string,
+    venue: string,
+    runningCompetitions: [
+        {
+            id: number,
+            name: string,
+            code: string,
+            type: string,
+            emblem: string
+        },
+    ],
+    coach: {
+        id: number,
+        firstName: string,
+        lastName: string,
+        name: string,
+        dateOfBirth: string,
+        nationality: string,
+        contract: {
+            start: string,
+            until: string
+        }
+    },
+    squad: [
+        {
+            id: number,
+            name: string,
+            position: string,
+            dateOfBirth: string,
+            nationality: string
+        },
+    ]
+}
+interface IgetOnePlayerResponse {
+    person: {
+        id: number,
+        name: string,
+        firstName: string,
+        lastName: string,
+        dateOfBirth: string,
+        nationality: string,
+        section: string,
+        position: null,
+        shirtNumber: null,
+        lastUpdated: string
+    },
+    matches: [
+        {
+            area: {
+                id: number,
+                name: string,
+                code: string,
+                flag: string
+            },
+            competition: {
+                id: number,
+                name: string,
+                code: string,
+                type: string,
+                emblem: string
+            },
+            season: {
+                id: number,
+                startDate: string,
+                endDate: string,
+                currentMatchday: number,
+                winner: null
+            },
+            id: number,
+            utcDate: string,
+            status: string,
+            matchday: number,
+            stage: string,
+            group: null,
+            lastUpdated: string,
+            homeTeam: {
+                id: number,
+                name: string,
+                shortName: string,
+                tla: string,
+                crest: string
+            },
+            awayTeam: {
+                id: number,
+                name: string,
+                shortName: string,
+                tla: string,
+                crest: string
+            },
+            score: {
+                winner: string,
+                duration: string,
+                fullTime: {
+                    home: number,
+                    away: number
+                },
+                halfTime: {
+                    home: number,
+                    away: number
+                }
+            },
+            odds: {
+                msg: string
+            },
+            referees: [
+                {
+                    id: number,
+                    name: string,
+                    type: string,
+                    nationality: string
+                }
+            ]
+        },
+    ]
+}
+interface IGetTableResponse {
+    filters: {
+        season: string
+    },
+    area: {
+        id: number,
+        name: string,
+        code: string,
+        flag: string
+    },
+    competition: {
+        id: number,
+        name: string,
+        code: string,
+        type: string,
+        emblem: string
+    },
+    season: {
+        id: number,
+        startDate: string,
+        endDate: string,
+        currentMatchday: number,
+        winner: null
+    },
+    standings: [
+        {
+            stage: string,
+            type: string,
+            group: null,
+            table: [
+                {
+                    position: number,
+                    team: {
+                        id: number,
+                        name: string,
+                        shortName: string,
+                        tla: string,
+                        crest: string
+                    },
+                    playedGames: number,
+                    form: string,
+                    won: number,
+                    draw: number,
+                    lost: number,
+                    points: number,
+                    goalsFor: number,
+                    goalsAgainst: number,
+                    goalDifference: number
+                },
+            ]
+        },
+    ]
+}
+
 export const footballApi = createApi({
     reducerPath: "footballApi",
     baseQuery: fetchBaseQuery({
@@ -427,47 +573,51 @@ export const footballApi = createApi({
         getOneLeague: builder.query<IGetOneArrayResponse, void>({
             query: () => "/competitions/SA"
         }),
-        getTenScorers: builder.query<IGetTenScorersResconce, IGetTenScorersPayload>({
-            query: () => "/competitions/PL/scorers"
-        }),
         getCounty: builder.query<IGetCountryResponce, void>({
             query: () => '/areas',
             keepUnusedDataFor: 300
-        }),
-        getEredivisie: builder.query<ScorersResponse, void>({
-            query: () => "/competitions/DED/standings"
         }),
         getAllMatches: builder.query<IGetAllMatchesResponse, IgetMatvfkgd>({
             query: ({ id, status }) => `/competitions/${id}/matches?season=2024&status=${status}`,
             keepUnusedDataFor: 300
         }),
-        getLIVEMaches: builder.query<IGetLiveMachesResponse, number>({
-            query: (idLive) => `/competitions/${idLive}/matches?status=LIVE`
-        }),
         getFinishedMatches: builder.query<IGetFinishedMatchesResponse, number>({
             query: (id) => `/competitions/${id}/matches?season=2024&status=FINISHED`,
             keepUnusedDataFor: 300
         }),
-        getPerson: builder.query<IGetPersonResponse, number>({
+        getPersonOneP: builder.query<IGetPersonResponse, number>({
             query: (id) => `/persons/${id}`,
             keepUnusedDataFor: 300
         }),
-        getAllTeam:builder.query<IGetAllTeamsResponse, number>({
-            query:(id)=> `/teams?limit=${id}`,
+        getAllTeam: builder.query<IGetAllTeamsResponse, number>({
+            query: (id) => `/teams?limit=${id}`,
             keepUnusedDataFor: 300
         }),
+        getOneTema: builder.query<IgetOneTeamResponse, number>({
+            query: (id) => `/teams/${id}`
+        }),
+        getOnePlayer: builder.query<IgetOnePlayerResponse, number>({
+            query: (id) => `/persons/${id}/matches`
+        }),
+        getTableLeague: builder.query<IGetTableResponse, number>({
+            query: (id) => `/competitions/${id}/standings`
+        }),
+        getTenScorers: builder.query<IGetTenScorersResconce, number>({
+            query: (id) => `/competitions/${id}/scorers`
+        }),
     })
-}) 
+})
 
 export const {
     useGetLeaguesQuery,
     useGetOneLeagueQuery,
     useGetTenScorersQuery,
     useGetCountyQuery,
-    useGetEredivisieQuery,
     useGetAllMatchesQuery,
-    useGetLIVEMachesQuery,
     useGetFinishedMatchesQuery,
-    useGetPersonQuery,
     useGetAllTeamQuery,
+    useGetOneTemaQuery,
+    useGetOnePlayerQuery,
+    useGetPersonOnePQuery,
+    useGetTableLeagueQuery,
 } = footballApi

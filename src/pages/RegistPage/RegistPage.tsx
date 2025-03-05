@@ -22,7 +22,6 @@ const registerFormSheme = yup.object({
     phone_number: yup
         .string()
         .required("Обьязательное поле!"),
-        
     password: yup
         .string()
         .required("Обьязательное поле!")
@@ -50,7 +49,7 @@ export const RegistPage = () => {
         defaultValues: {
             name: '',
             email: '',
-            phone_number: undefined,
+            phone_number:  "998",
             password: '',
             user_city: '',
 
@@ -69,14 +68,14 @@ export const RegistPage = () => {
             if (responce.status === 1) {
                 dispatch(changeUser(payload))
                 navigate('/')
-            }else{
+            } else {
                 setErrorStatus(true)
             }
         } catch (error) {
             console.error("Ошибка " + error);
 
         }
-            
+
     }
 
     return (
@@ -123,7 +122,9 @@ export const RegistPage = () => {
                                 inpPlacehol="Ваш номер"
                                 inpType="tel"
                                 inpValue={field.value}
-                                inpChange={field.onChange}
+                                inpChange={(e) => {
+                                    const onlyNums = e.target.value.replace(/\D/g, '');
+                                    field.onChange(onlyNums);}}
                                 errorText={errors.phone_number?.message}
                                 isError={Boolean(errors.phone_number)}
 
@@ -142,11 +143,10 @@ export const RegistPage = () => {
                                     inpChange={field.onChange}
                                     errorText={errors.password?.message}
                                     isError={Boolean(errors.password)}
-
                                 />
                             )}
                         />
-                        <img src="public/img/mys.svg" alt="eye" onClick={()=>setShowPassword(!showPassword)}/>
+                        <img src="public/img/mys.svg" alt="eye" onClick={() => setShowPassword(!showPassword)} />
                     </div>
 
                     <Controller
@@ -164,7 +164,7 @@ export const RegistPage = () => {
                             />
                         )}
                     />
-                    {errorStatus ? <p style={{color:"red"}}>Вы ввели непривильный емайл!</p> : null}
+                    {errorStatus ? <p style={{ color: "red" }}>Вы ввели непривильный емайл!</p> : null}
                     <AppButton
                         butText="Регистрация"
                         butType="submit"

@@ -1,27 +1,32 @@
-import { useGetPersonQuery } from "../../../store/Api/FootballApi"
-import { Loader } from "../../loader/Loader"
+
+import { useContext } from "react";
+import { useGetPersonOnePQuery} from "../../../store/Api/FootballApi";
 import { SPersonApi } from "./PersonApi.style"
+import { ThemeContext, themes } from "../../../contexts/themeContexts";
 
 interface TPerson {
     personId: number,
     personImg: string,
     favP: any[],
-    toogle: (player: any)=>void
+    toogle: (player: any) => void,
+    playerInfo: (idPl: any) => void,
 }
 
-export const PersonSettingApi = ({ personId, personImg,favP,toogle }: TPerson) => {
-    const { data, isError, isLoading } = useGetPersonQuery(personId)
-   
+export const PersonSettingApi = ({ personId, personImg, favP, toogle, playerInfo }: TPerson) => {
+    const {theme} = useContext(ThemeContext)
+    const {data, isError} = useGetPersonOnePQuery(personId)
+
     const isFavorited = favP.some((elem) => elem.id === data?.id)
 
-    if (isLoading) return <Loader />
+
+    // if (isLoading) return <Loader />
     if (isError) return <p>Ошибка: нет данных!</p>
     return (
-        <SPersonApi>
+        <SPersonApi isLight= {theme === themes.light}>
             <div className="personCard">
-                <div className="personImg" style={{ backgroundImage: `URL(${personImg})` }}></div>
+                <div onClick={() => playerInfo(data?.id)} className="personImg" style={{ backgroundImage: `URL(${personImg})` }}></div>
                 <div className="personCardInfo">
-                    <h4>{data?.lastName}</h4>
+                    <h4 onClick={() => playerInfo(data?.id)}>{data?.lastName}</h4>
                     <p>Номер: {data?.shirtNumber}</p>
                 </div>
                 <div className="personCardStar">
@@ -29,7 +34,7 @@ export const PersonSettingApi = ({ personId, personImg,favP,toogle }: TPerson) =
                     <img
                         className="favIcon"
                         src={`${isFavorited ? "public/img/StarG.svg" : "public/img/StarW.svg"}`} alt="favorites"
-                        onClick={()=> toogle(data)}
+                        onClick={() => toogle(data)}
                     />
                 </div>
             </div>

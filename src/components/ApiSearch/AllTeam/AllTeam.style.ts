@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 
-export const SAllTeam = styled.div`
+export const SAllTeam = styled.div<{isLight:boolean}>`
 
 .allTemCont{
     display: grid;
@@ -22,10 +22,12 @@ export const SAllTeam = styled.div`
     border: 1px solid #333131;
 }
 .teamCard img{
+    cursor: pointer;
     margin: 0 auto;
     width: calc(4.5vw + 33px);
 }
 .teamCard span{
+    cursor: pointer;
     font-size: calc(0.9vw + 5px);
     padding-bottom: 4px;
 }
@@ -55,10 +57,17 @@ export const SAllTeam = styled.div`
     box-shadow: 0 0 10px 5px #C3CC5A;
 }
 .teamCard:hover{
-    /* border: 1px solid #000; */
     box-shadow: 0 0 10px 5px #000;
 }
 a:hover{
     box-shadow: 0 0 10px 5px #C3CC5A;
-    }
+}
+${({isLight})=>
+isLight && 
+css`
+.teamCard{
+    background-color: #fff;
+}
+`
+}
 `

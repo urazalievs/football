@@ -32,6 +32,7 @@ interface ILoginForm {
 }
 
 
+
 export const LoginPage = () => {
 
     const navigate = useNavigate()
@@ -59,8 +60,8 @@ export const LoginPage = () => {
         setErrorMessage(null)
         const payload = { email: data.userEmail, password: data.userPassword }
         const response = await loginUser(payload)
-
-        if (response) {
+        
+        if (response.data?.message) {
             setErrorMessage("Неверный пароль или почта!")
         }
     }

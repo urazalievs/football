@@ -1,15 +1,17 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { Country } from "../ApiSearch/Country/Country"
 import { AppInput } from "../UI/AppInput/AppInput"
 import { SSearchCountry } from "./SearchCountry.style"
 import { ModalCountry } from "../ModalCountry/ModalCountry"
 import { useGetCountyQuery } from "../../store/Api/FootballApi"
 import { Loader } from "../loader/Loader"
+import { ThemeContext, themes } from "../../contexts/themeContexts"
 
 
 
 
 export const SeachCountry = () => {
+    const {theme} = useContext(ThemeContext)
     const [getModal, setGetModal] = useState(false)
     const { data, isError, isLoading } = useGetCountyQuery()
     const [searchGuery, setSearchQuery] = useState('')
@@ -26,7 +28,7 @@ export const SeachCountry = () => {
 
     return (
         <>
-            <SSearchCountry>
+            <SSearchCountry isLight={theme === themes.light}>
                 {getModal && <ModalCountry />}
                 <div className="leftSearch">
                     <h2>Поиск стран</h2>

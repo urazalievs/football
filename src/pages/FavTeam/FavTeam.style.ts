@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 
 
-export const SFavTeam = styled.div`
+export const SFavTeam = styled.div<{isLight:boolean}>`
 padding: calc(2.8vw + -6px) calc(2vw + 0.4px) 48px calc(2vw + 0.4px);
 display: flex;
 flex-direction: column;
@@ -32,7 +32,6 @@ main{
     background-color: #1E1E1E;
     border-radius: 20px;
     padding:calc(2vw + 0.1px) calc(0.9vw + 2px) 20px calc(0.9vw + 2px);
-    /* height: 100vh; */
 };
 .playerCard{
     display: grid;
@@ -79,6 +78,9 @@ main{
     gap: calc(0.6vw + 1px);
     align-items: center;
 }
+.teamCard img, .teamCard span{
+    cursor: pointer;
+}
 .teamCardFav img{
     cursor: pointer;
     width: calc(1.5vw + 6.5px);
@@ -98,7 +100,22 @@ main{
 .teamCard a:hover{
     box-shadow: 0 0 10px 5px #C3CC5A;
     }
-
+${({isLight})=>
+isLight && 
+css`
+main{
+    background-color: #666  ;
+}
+.teamCard{
+    background-color: #fff;
+    color: black;
+}
+background-color: #ccc;
+`
+}
+.burgerInfo{
+    top: calc(4.2vw + 14.1px);
+}
 @media (max-width:600px) {
 > :nth-child(1){
     display: block;

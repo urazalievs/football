@@ -1,7 +1,9 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-
-export const SLigftTheme = styled.div`
+interface ILighthTheme{
+    isLight: boolean
+}
+export const SLigftTheme = styled.div<ILighthTheme>`
 text-align: center;
 .rihghtNavTheme{
     width: calc(15vw + 29px);
@@ -13,6 +15,7 @@ text-align: center;
     align-items: center;
     gap:calc(0.5vw + 2px);
 }
+
 .rightTheme{
     cursor: pointer;
     display: flex;
@@ -28,9 +31,30 @@ text-align: center;
 }
 .darkTheme{
     background-color: #1E1E1E;
+    color: #fff;
 }
 .rightTheme.lightTheme{
-    background-color: white;
+    background-color: #999;
     color: black;
+}
+${({isLight})=>
+    isLight ?
+    css`
+    .rihghtNavTheme{
+        background-color: #ccc;
+        color: black;
+    }
+    .darkTheme{
+        background-color: #ccc;
+        color: black;
+    }
+    `:
+    css`
+    .rihghtNavTheme{
+        background-color: #333131;
+        color:#fff;
+    }
+    
+    `
 }
 `

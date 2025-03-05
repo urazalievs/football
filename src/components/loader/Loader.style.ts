@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 
 
-export const SLoader = styled.div`
+export const SLoader = styled.div<{isLight:boolean}>`
 z-index: 999;
 position: fixed;
 top: 0;
@@ -33,4 +33,13 @@ height: 100vh;
   100% { box-shadow: -10px 20px, 10px  35px, 0px 50px}
 }
  }
+ ${({isLight})=>
+isLight &&
+css`
+background-color: #fff;
+.loader{
+  color: black;
+}
+`
+}
 `

@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 
-export const SAllMatches = styled.div`
+export const SAllMatches = styled.div<{isLight?:boolean}>`
 .matches{
     margin-bottom: calc(0.9vw + 17px);
     border-radius: 20px;
@@ -74,7 +74,6 @@ li:nth-child(2n){
     text-align: center;
     text-transform: uppercase;
     border-radius: 20px;
-    /* border: 1px solid #c3cc5a99; */
 }
 .nextMatch p {
     font-size: calc(0.9vw + 6px);
@@ -96,5 +95,23 @@ li:nth-child(2n){
 }
 .mImg img{
     width:  calc(1.3vw + 4px);
+}
+${({isLight})=>
+isLight && 
+css`
+.matchesInfo{
+    background-color: #999;
+}
+li{
+    background-color: #fff;
+}
+li:nth-child(2n){
+    background-color: #ccc;
+}
+.nextMatch{
+    background-color: #999;
+    border-radius: 0px;
+}
+`
 }
 `

@@ -1,6 +1,8 @@
+import { useContext } from "react"
 import { useGetAllMatchesQuery, useGetFinishedMatchesQuery,} from "../../../store/Api/FootballApi"
 import { Loader } from "../../loader/Loader"
 import { SAllMatches } from "./AllMatches.style"
+import { ThemeContext, themes } from "../../../contexts/themeContexts"
 
 
 interface TOneMatches {
@@ -9,21 +11,21 @@ interface TOneMatches {
     matchStatus: string
 }
 export const OneMatch = ({ matchName, matchId, matchStatus }: TOneMatches) => {
+    const {theme} =useContext(ThemeContext)
     const { data, isError, isLoading } = useGetAllMatchesQuery({ id: matchId, status: matchStatus }, )
     const { data: dataFinish, isError: isErrorFinish, } = useGetFinishedMatchesQuery(matchId, )
-    // const [dataMatches, timeMatches] = data?.matches[0].utcDate.split("T")
     if (isErrorFinish) return <p>Ошибка: нет данных!</p>
     if (isLoading) return <Loader />
     if (isError) return <p>Ошибка: нет данных!</p>
     return (
-        <SAllMatches>
+        <SAllMatches isLight = {theme === themes.light}>
                 <div className="matches">
                     <div className="matchesInfo">
                         <div className="matchesInfoName"> 
                             <img src={data?.matches[0].competition.emblem} alt="flag" />
                             <h3 >{data?.matches[0].competition.name} ( {matchName} )</h3>
                         </div>
-                        <span>Подробнее</span>
+                        <span></span>
                     </div>
                     <div className="matchesTable">
                         {dataFinish && dataFinish.matches.slice(0, 4).map((elem1, index)=>(

@@ -4,8 +4,8 @@ import { useGetOneLeagueQuery } from "../../../store/Api/FootballApi"
 export const OneLeagues = () => {
     const { data, isLoading } = useGetOneLeagueQuery()
 
-    if (isLoading) return <div>Loading...</div>;  // Показать загрузку
-    if (!data || !data) return <div>No data available</div>;  // Проверка на отсутствие данных
+    if (isLoading) return <div>Loading...</div>;
+    if (!data || !data) return <div>No data available</div>; 
 
     const ArrayOneLaeague = [data]
     return (

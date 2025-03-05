@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { SModalCountry } from "./ModalCountry.style"
 import { AppButton } from "../UI/AppButton/AppButton";
+import { ThemeContext, themes } from "../../contexts/themeContexts";
 
 
 export const ModalCountry = () => {
+    const {theme} =useContext(ThemeContext)
     const [favcountry, stFavCountry] =useState<any>(null)
     const [displayModal, setDisplayModal] = useState(false)
 
@@ -18,7 +20,7 @@ export const ModalCountry = () => {
     }
     
     return (
-        <SModalCountry style={{display:`${displayModal ? "none": 'block' }`}}>
+        <SModalCountry isLight={theme === themes.light} style={{display:`${displayModal ? "none": 'block' }`}}>
             {favcountry && <div className="mdalCountryCont">
                 <img src={favcountry.flag || "public/img/allF.jpg"} alt="flag"/>
                 <h2>{favcountry.name}</h2>

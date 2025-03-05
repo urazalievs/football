@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 
-export const SSearchCountry = styled.div`
+export const SSearchCountry = styled.div<{isLight: boolean}>`
 .leftSearch{
         text-align: center;
         margin-top: calc(0.9vw + 5px);
@@ -57,5 +57,26 @@ export const SSearchCountry = styled.div`
 }
 .countryContainer:nth-child(2n):hover{
     box-shadow: 0 0 8px 3px #000;
+}
+${({isLight})=>
+isLight &&
+css`
+.formSearch input{
+        background-color: #fff;
+        color: black;
+}
+.countryContainer{
+    color: black;
+    background-color: #fff;
+}
+.countryContainer:nth-child(2n){
+    background-color: #ccc;
+}
+.AllCountyCount{
+    background-color:#999;
+    color: black;
+}
+
+`
 }
 `

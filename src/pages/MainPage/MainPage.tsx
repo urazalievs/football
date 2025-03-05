@@ -14,14 +14,14 @@ import { ThemeContext, themes } from "../../contexts/themeContexts"
 export const MainPage = () => {
     const { theme } = useContext(ThemeContext)
 
-    const [selectRadio, setSelectRadio] = useState<string>('rd3')
+    const [selectRadio, setSelectRadio] = useState<string>('rd1')
 
     const handlerChacge = (id: string) => {
         setSelectRadio(id);
     }
     return (
 
-        <SMainPage>
+        <SMainPage islight={theme === themes.light}>
             <div className="mainHeader">
                 <MainHeader
                     homePage={true}
@@ -29,7 +29,7 @@ export const MainPage = () => {
                     teamPage={false}
                 />
             </div>
-            <div className={`mainPageContainer ${theme === themes.light && '_dark'}`}>
+            <div className={`mainPageContainer ${theme === themes.light && '_lightBgCC'}`}>
                 <div className="rightCont">
                     <RightSide
                         homePage={true}
@@ -48,8 +48,8 @@ export const MainPage = () => {
                         <div className="">
                             {selectRadio === "rd1" && <AllMatches />}
                             {selectRadio === 'rd2' && <AllLeagues />}
-                            {selectRadio === "rd3" && <PersonApi />}
                             {selectRadio === "rd4" && <AllTeam />}
+                            {selectRadio === "rd3" && <PersonApi />}
                         </div>
                         <div>
                         </div>

@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 
-export const SMainHeader = styled.div`
+export const SMainHeader = styled.div<{isLight:boolean}>`
     display: none;  
    padding: calc(1vw + 14px) 0 0 0;
    position: relative;
@@ -112,7 +112,20 @@ li.activ{
 .headerNavPage a.navtext{
     color: #C3CC5A;
 }
-
+${({isLight})=>
+isLight &&
+css`
+.navContainer{
+    background-color: #666;
+}
+.headerNavPage{
+    background-color: #999;
+}
+.headerNavPage a{
+    color: black;
+}
+`
+}
 @media (max-width: 1000px) {
         display: block;
 }

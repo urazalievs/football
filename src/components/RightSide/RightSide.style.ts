@@ -7,7 +7,7 @@ export const SRightSide = styled.div`
     padding: 31px 0 20px 0;
     background-color: #1E1E1E;
     width:calc(27vw + -85px);
-    border-radius: 30px;
+    border-radius: 25px;
     display: flex;
     flex-direction:column;
     justify-content: space-between;

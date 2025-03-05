@@ -1,3 +1,5 @@
+import { useContext } from "react"
+import { ThemeContext, themes } from "../../contexts/themeContexts"
 import { SCardRadio } from "./CardRadio.style"
 
 interface TCardRadio {
@@ -6,8 +8,9 @@ interface TCardRadio {
 }
 
 export const CardRadio = ({selectedRadio,onRadioChange}:TCardRadio) => {
+    const {theme} =useContext(ThemeContext)
     return (
-        <SCardRadio>
+        <SCardRadio islight= {theme === themes.light}>
             <div className="mainCardsContainer">
                 <input 
                     id="rd1" 
@@ -18,16 +21,7 @@ export const CardRadio = ({selectedRadio,onRadioChange}:TCardRadio) => {
                 />
                 <label htmlFor="rd1">Мачи</label>
             </div>
-            <div className="mainCardsContainer">
-                <input 
-                    id="rd2"
-                    name="CardChek"
-                    type="radio"
-                    checked={selectedRadio === "rd2"}
-                    onChange={()=>onRadioChange("rd2")}
-                />
-                <label htmlFor="rd2">Все лиги</label>
-            </div>
+            
             <div className="mainCardsContainer">
                 <input 
                     id="rd3"
@@ -47,6 +41,16 @@ export const CardRadio = ({selectedRadio,onRadioChange}:TCardRadio) => {
                     onChange={()=>onRadioChange("rd4")}
                 />
                 <label htmlFor="rd4">Все команды</label>
+            </div>
+            <div className="mainCardsContainer">
+                <input 
+                    id="rd2"
+                    name="CardChek"
+                    type="radio"
+                    checked={selectedRadio === "rd2"}
+                    onChange={()=>onRadioChange("rd2")}
+                />
+                <label htmlFor="rd2">Все лиги</label>
             </div>
         </SCardRadio>
     )
